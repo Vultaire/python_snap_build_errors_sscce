@@ -1,0 +1,19 @@
+name: sscce
+summary: A short, self-contained complete example of a Python snap build
+description: |
+    sscce is a short, self-contained complete example of a Python snap build.
+version: test
+base: core24
+confinement: classic
+
+parts:
+  sscce:
+    plugin: python
+    source: .
+    stage-packages:
+      - python3-venv
+
+apps:
+  sscce:
+    command: bin/sscce
+    plugs: []
