@@ -1,0 +1,27 @@
+name: sscce
+summary: A short, self-contained complete example of a Python snap build
+description: |
+    sscce is a short, self-contained complete example of a Python snap build.
+version: test
+base: core24
+confinement: strict
+
+parts:
+  sscce:
+    plugin: python
+    source: .
+    # Intent of the following: to depend on Ubuntu-provided Python packages
+    # to reduce the chance of supply chain attacks.
+    stage-packages:
+      - python3-minimal
+      - python3-typer
+    # Since a venv is created, this intuitively seems like it should allow
+    # us access to the Python packages staged above - but it alone is
+    # inadequate.
+    build-environment:
+      - PARTS_PYTHON_VENV_ARGS: "--system-site-packages"
+
+apps:
+  sscce:
+    command: bin/sscce
+    plugs: []
