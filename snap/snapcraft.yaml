@@ -11,9 +11,9 @@ parts:
     plugin: python
     source: .
     stage-packages:
-      - python3-venv
+      - python3.12-minimal
 
 apps:
   sscce:
-    command: bin/sscce
+    command: bin/python $SNAP/bin/sscce
     plugs: []
