@@ -13,6 +13,7 @@ parts:
     # Intent of the following: to depend on Ubuntu-provided Python packages
     # to reduce the chance of supply chain attacks.
     stage-packages:
+      - python3.12-minimal
       - python3-minimal
       - python3-typer
     # Since a venv is created, this intuitively seems like it should allow
@@ -23,5 +24,4 @@ parts:
 
 apps:
   sscce:
-    command: bin/sscce
-    plugs: []
+    command: bin/python $SNAP/bin/sscce
