@@ -10,18 +10,13 @@ parts:
   sscce:
     plugin: python
     source: .
-    # Intent of the following: to depend on Ubuntu-provided Python packages
-    # to reduce the chance of supply chain attacks.
+    # I want the benefits of Ubuntu LTS packages, thus am choosing to use them
+    # instead of pulling the latest code from PyPI.
     stage-packages:
-      - python3.12-minimal
-      - python3-minimal
       - python3-typer
-    # Since a venv is created, this intuitively seems like it should allow
-    # us access to the Python packages staged above - but it alone is
-    # inadequate.
-    build-environment:
-      - PARTS_PYTHON_VENV_ARGS: "--system-site-packages"
 
 apps:
   sscce:
     command: bin/python $SNAP/bin/sscce
+    environment:
+      PYTHONPATH: "$SNAP/usr/lib/python3/dist-packages"
